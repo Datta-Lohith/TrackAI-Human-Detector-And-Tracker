@@ -1,3 +1,14 @@
+/**
+ * @file visualizer.cpp
+ * @author Datta Lohith Gannavarapu, Dheeraj Vishnubhotla, Nazrin Gurbanova
+ * @brief This file contains the implementation of the Visualizer class, 
+ *        which is responsible for displaying detection results, creating 
+ *        bounding boxes around detected objects, and saving the results to a video file.
+ * @version 0.1
+ * @date 2024-10-23
+ * @copyright Copyright (c) 2024
+ */
+
 // Define Macros for colors and drawing properties
 #define RED cv::Scalar(0, 0, 255)
 #define BLUE cv::Scalar(255, 178, 50)
@@ -10,7 +21,15 @@
 #include <opencv2/highgui.hpp>
 #include "../include/visualizer.hpp"
 
-
+/**
+ * @brief Displays the results of the object detection process.
+ *
+ * This method calculates the inference time and displays it on the provided image.
+ * It also shows the image in a window and stores it for later video creation.
+ *
+ * @param net The DNN network used for inference.
+ * @param human The image in which the results will be displayed.
+ */
 void TrackAI::Visualizer::DisplayResults(cv::dnn::Net &net, cv::Mat &human) {
     std::vector<double> layersTimes;
     double freq = cv::getTickFrequency() / 1000;
@@ -24,7 +43,20 @@ void TrackAI::Visualizer::DisplayResults(cv::dnn::Net &net, cv::Mat &human) {
     images.push_back(human);
 }
 
-
+/**
+ * @brief Creates bounding boxes for detected objects and displays them on the image.
+ *
+ * This method takes the indices of detected objects and their corresponding bounding boxes,
+ * draws the boxes on the input image, and labels them with the class name and index.
+ *
+ * @param indices A vector of indices corresponding to detected objects.
+ * @param boxes A vector of rectangles representing the bounding boxes of detected objects.
+ * @param bboxes A pointer to a vector where the created bounding boxes will be stored.
+ * @param input_image The image on which the bounding boxes will be drawn.
+ * @param class_list A vector of class names corresponding to class IDs.
+ * @param class_ids A vector of class IDs for the detected objects.
+ * @param confidences A vector of confidence scores for the detected objects.
+ */
 void TrackAI::Visualizer::CreateBoundingBox(
     std::vector<int> indices, std::vector<cv::Rect> boxes,
     std::vector<cv::Rect> *bboxes, cv::Mat &input_image,
@@ -64,7 +96,12 @@ void TrackAI::Visualizer::CreateBoundingBox(
     }
 }
 
-
+/**
+ * @brief Saves the processed images to a video file.
+ *
+ * This method checks if there are images to save, resizes them to a uniform size,
+ * and writes them to a video file in AVI format.
+ */
 void TrackAI::Visualizer::SaveResults() {
     if (images.empty()) {
         std::cerr << "No images to save to video." << std::endl;

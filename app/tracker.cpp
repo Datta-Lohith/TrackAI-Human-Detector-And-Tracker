@@ -1,24 +1,34 @@
-/*
-@file tracker.cpp
-@author Datta Lohith Gannavarapu, Dheeraj Vishnubhotla
-@brief This file contains the implementation of the Tracker class
-@version 0.1
-@date 2024-10-16
-
-@copyright Copyright (c) 2024
-*/
+/**
+ * @file tracker.cpp
+ * @author Datta Lohith Gannavarapu, Dheeraj Vishnubhotla, Nazrin Gurbanova
+ * @brief This file contains the implementation of the Tracker class, which is responsible for 
+ *        tracking detected objects in a video frame using the CSRT tracking algorithm.
+ * @version 0.1
+ * @date 2024-10-23
+ * @copyright Copyright (c) 2024
+ */
 
 #include "../include/tracker.hpp"
 
-TrackAI::Tracker(){
-    input_width = 640;
-    input_height = 640;
+/**
+ * @brief Default constructor for the Tracker class.
+ *
+ * Initializes the tracker using the CSRT algorithm and sets the initialization flag.
+ */
+TrackAI::Tracker::Tracker() {
+    isInitialized = false; // Indicates whether the tracker has been initialized
+    tracker = cv::TrackerCSRT::create(); // Create a new CSRT tracker instance
 }
 
-void TrackAI::Tracker::Initialize() {
-  std::cout << "Tracker Initialized" << std::endl;
-}
-
-void TrackAI::Tracker::Track() {
-  std::cout << "Tracking in progress" << std::endl;
+/**
+ * @brief Tracks objects in the provided video frame.
+ *
+ * This method either initializes the tracker with the bounding boxes of detected objects
+ * or updates the tracker with new positions if it has already been initialized.
+ *
+ * @param frame The current video frame in which tracking is to be performed.
+ * @param bboxes A vector of bounding boxes representing detected objects to track.
+ */
+void TrackAI::Tracker::Track(cv::Mat& frame, std::vector<cv::Rect> bboxes) {
+    std::cout << "Tracking Objects..." << std::endl;
 }

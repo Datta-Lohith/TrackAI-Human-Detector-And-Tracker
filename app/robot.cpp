@@ -1,6 +1,21 @@
+/**
+ * @file robot.cpp
+ * @author Datta Lohith Gannavarapu, Dheeraj Vishnubhotla, Nazrin Gurbanova
+ * @brief This file contains the implementation of the Robot class, responsible for 
+ *        managing the detection, tracking, and visualization of human objects 
+ *        in a camera frame or a set of images.
+ * @version 0.1
+ * @date 2024-10-23
+ * @copyright Copyright (c) 2024
+ */
+
 #include "robot.hpp"
 
-
+/**
+ * @brief Default constructor for the Robot class.
+ *
+ * Initializes the camera intrinsic matrix K, rotation matrix R, and translation vector T.
+ */
 TrackAI::Robot::Robot() 
     : K((cv::Mat_<double>(3, 3) << 600.0, 0, 320.0,
                                    0, 600.0, 240.0,
@@ -12,11 +27,28 @@ TrackAI::Robot::Robot()
     // Default translation vector T (2 units along the Z-axis)
 }
 
-
+/**
+ * @brief Parameterized constructor for the Robot class.
+ *
+ * Initializes the Robot with specified camera parameters.
+ *
+ * @param my_K The camera intrinsic matrix.
+ * @param my_R The rotation matrix.
+ * @param my_T The translation vector.
+ */
 TrackAI::Robot::Robot(cv::Mat my_K, cv::Mat my_R, cv::Mat my_T)
     : K(my_K), R(my_R), T(my_T) {}
 
-
+/**
+ * @brief Runs the detection and tracking process.
+ *
+ * This method either captures video from the camera or processes a set of images.
+ * It handles the loading of the YOLO model, processes each frame for detections,
+ * and utilizes the visualizer to display and save results.
+ *
+ * @param is_camera Boolean flag indicating whether to use the camera (true) 
+ *                  or to process image files (false).
+ */
 void TrackAI::Robot::Run(bool is_camera) {
     std::vector<cv::Mat> detections;
     cv::Mat human;
@@ -63,7 +95,17 @@ void TrackAI::Robot::Run(bool is_camera) {
     cv::destroyAllWindows(); // Close all OpenCV windows
 }
 
-
+/**
+ * @brief Processes an input image for detection and tracking.
+ *
+ * This method takes a frame, runs detection on it, and creates bounding boxes
+ * around detected objects. It also tracks the detected humans and visualizes 
+ * the results.
+ *
+ * @param frame The input image to process.
+ * @param detections A vector to store the detection results.
+ * @param human A matrix to hold the detected human information.
+ */
 void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detections, cv::Mat &human) {
     detections = detector.PreProcess(frame, net);
 
@@ -85,7 +127,14 @@ void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detectio
     CoorInRobotFrame(boxes);
 }
 
-
+/**
+ * @brief Transforms detected bounding box coordinates into the robot's coordinate frame.
+ *
+ * This method calculates the center of each detected bounding box and converts it
+ * from normalized camera coordinates to the robot frame coordinates.
+ *
+ * @param detections A vector of bounding boxes representing detected objects.
+ */
 void TrackAI::Robot::CoorInRobotFrame(const std::vector<cv::Rect> &detections) {
     // Check if detections are empty
     if (detections.empty()) return;
