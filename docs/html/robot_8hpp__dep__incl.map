@@ -1,0 +1,6 @@
+<map id="include/robot.hpp" name="include/robot.hpp">
+<area shape="rect" id="node1" title="This file contains the declaration of the Robot class for robotic perception and tracking." alt="" coords="149,5,283,32"/>
+<area shape="rect" id="node2" href="$detector_8cpp.html" title="This file contains the implementation of the Detector class for object detection." alt="" coords="5,80,136,107"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="This file contains the main function to run the TrackAI application." alt="" coords="161,80,271,107"/>
+<area shape="rect" id="node4" href="$robot_8cpp.html" title="This file contains the implementation of the Robot class, responsible for managing the detection,..." alt="" coords="295,80,406,107"/>
+</map>

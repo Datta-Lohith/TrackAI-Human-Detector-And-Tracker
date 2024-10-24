@@ -1,0 +1,8 @@
+<map id="include/visualizer.hpp" name="include/visualizer.hpp">
+<area shape="rect" id="node1" title="This file contains the declaration of the Visualizer class for displaying and saving results of objec..." alt="" coords="35,5,197,32"/>
+<area shape="rect" id="node2" href="$detector_8cpp.html" title="This file contains the implementation of the Detector class for object detection." alt="" coords="5,155,136,181"/>
+<area shape="rect" id="node3" href="$visualizer_8cpp.html" title="This file contains the implementation of the Visualizer class, which is responsible for displaying de..." alt="" coords="47,80,185,107"/>
+<area shape="rect" id="node4" href="$robot_8hpp.html" title="This file contains the declaration of the Robot class for robotic perception and tracking." alt="" coords="210,80,345,107"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="This file contains the main function to run the TrackAI application." alt="" coords="191,155,302,181"/>
+<area shape="rect" id="node6" href="$robot_8cpp.html" title="This file contains the implementation of the Robot class, responsible for managing the detection,..." alt="" coords="326,155,437,181"/>
+</map>

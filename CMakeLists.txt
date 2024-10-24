@@ -24,6 +24,14 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
+
+# OpenCV Setup
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+find_package(Eigen3)
+INCLUDE_DIRECTORIES(${EIGEN3_INCLUDE_DIR})
+
+
 #
 # Doxygen Support check if Doxygen is installed
 # ref: https://cmake.org/cmake/help/latest/module/FindDoxygen.html
