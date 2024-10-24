@@ -22,7 +22,7 @@ std::vector<float> confidences;     ///< Vector to hold confidence scores for de
 std::vector<std::string> class_list; ///< Vector to hold class names
 cv::Mat img = cv::imread("../../Data/Images/img0.jpg"); ///< Input image for testing
 int width = img.cols;               ///< Width of the input image
-std::string model_path = "../../Data/Models/yolov8s.onnx"; ///< Path to the YOLO model
+std::string model_path = "../../Data/Model/yolov8s.onnx"; ///< Path to the YOLO model
 
 // Instances of classes being tested
 TrackAI::Detector detector;         ///< Instance of the Detector class
