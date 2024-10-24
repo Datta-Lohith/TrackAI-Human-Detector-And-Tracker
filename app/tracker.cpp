@@ -10,6 +10,11 @@
 
 #include "../include/tracker.hpp"
 
+TrackAI::Tracker(){
+    input_width = 640;
+    input_height = 640;
+}
+
 void TrackAI::Tracker::Initialize() {
   std::cout << "Tracker Initialized" << std::endl;
 }

@@ -21,6 +21,7 @@ namespace TrackAI {
         float input_width;
 
     public:
+        Tracker();
         void Initialize();
         void Track();
     };
