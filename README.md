@@ -44,57 +44,6 @@ In phase 0 we have started with high level design which is the UML and made acti
 [![UML Diagrams](https://img.shields.io/badge/UML%20Diagram%20Phase%200-000000?style=for-the-badge&logo=uml&logoColor=white)](/UML/Phase%200/UML.pdf)
 [![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=0#gid=0)
 
-## Phase 1:
-In phase 1 we have started with the implementation of high level design which is the Revised UML. The detector and tracker classes are implemented with basic functionality and the visualizer and robot are implemented with stubs.
-
-
-### Deliverables
-[![Phase 1 Video](https://img.shields.io/badge/Explanation%20Video-000000?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/file/d/1PM65M6P8xBzXUW2DXN79xyw2vE71nDrk/view?usp=sharing)
-[![UML Diagrams](https://img.shields.io/badge/UML%20Diagram%20Phase%201-000000?style=for-the-badge&logo=uml&logoColor=white)](/UML/Phase%200/UML.pdf)
-[![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=0#gid=0)
-
-## Dependencies Installation
-The project requires opencv library installation. Follow the below procedure to install opencv libraries
-
-```bash
-    # Install minimal prerequisites (Ubuntu 22.04 as reference)
-    sudo apt update && sudo apt install -y cmake g++ wget unzip
-    git clone https://github.com/opencv/opencv.git
-    cd opencv 
-    git checkout 4.10.0
-    cd ..
-    git clone https://github.com/opencv/opencv_contrib.git
-    cd opencv_contrib
-    git checkout 4.10.0
-    cd ..
-    cd opencv
-    mkdir build
-    cd build
-    cmake -D CMAKE_BUILD_TYPE=RELEASE \
-            -D BUILD_EXAMPLES=OFF \
-            -D CMAKE_CXX_STANDARD=14 \
-            -D CMAKE_CXX_FLAGS="-std=c++14" \
-            -D ENABLE_CXX11=ON .. \
-            -D BUILD_opencv_apps=OFF \
-            -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
-            -D BUILD_DOCS=OFF \
-            -D BUILD_PERF_TESTS=OFF \
-            -D BUILD_TESTS=OFF \
-            -D WITH_CUDA=OFF \
-            -D CMAKE_INSTALL_PREFIX=/usr/local ..
-            
-    make 
-    sudo make install
-    sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
-    sudo ldconfig
-
-    # Install Eigen library
-    sudo apt install libeigen3-dev
-
-    #Optional(For generating docs)
-    sudo apt-get install graphviz
-```
-
 ## Code Build Procedure
 Follow the below procedure to download the code and start building
 ```bash
