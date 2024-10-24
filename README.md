@@ -27,9 +27,6 @@ The high-level flow of the methodology can be visualized in the activity diagram
 
 ## Activity Diagram
 
-<p align="center">
-<img width="60%" alt="Activity Diagram" src="/Activity Diagram.png">
-</p>
 
 ## Team
 
@@ -46,7 +43,6 @@ In phase 0 we have started with high level design which is the UML and made acti
 [![Proposal Document](https://img.shields.io/badge/Proposal%20Document-000000?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](/Documents/Midterm%20Proposal.pdf)
 [![UML Diagrams](https://img.shields.io/badge/UML%20Diagram%20Phase%200-000000?style=for-the-badge&logo=uml&logoColor=white)](/UML/Phase%200/UML.pdf)
 [![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=0#gid=0)
-
 
 ## Code Build Procedure
 Follow the below procedure to download the code and start building
@@ -96,3 +92,7 @@ To run the tests and generate code coverage reports:
 ### LICENSE
 
 This project is open source and is released under the MIT License. You are free to use, modify, and distribute the code in accordance with the terms of the MIT License.
+
+### References
+
+- https://github.com/ultralytics/ultralytics/tree/main/examples/YOLOv8-CPP-Inference
