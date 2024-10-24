@@ -1,0 +1,7 @@
+Done processing ./app/detector.cpp
+Done processing ./app/main.cpp
+Done processing ./app/robot.cpp
+Done processing ./app/tracker.cpp
+Done processing ./app/visualizer.cpp
+Done processing ./test/main.cpp
+Done processing ./test/test.cpp
