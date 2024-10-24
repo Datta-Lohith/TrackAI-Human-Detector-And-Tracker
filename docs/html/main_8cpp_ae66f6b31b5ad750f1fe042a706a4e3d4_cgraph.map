@@ -1,0 +1,4 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="The main function of the TrackAI application." alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node2" href="$classTrackAI_1_1Robot.html#a70f18b70b2d0fa895c62a5906a3ef7a5" title="Runs the detection and tracking process." alt="" coords="108,5,256,32"/>
+</map>

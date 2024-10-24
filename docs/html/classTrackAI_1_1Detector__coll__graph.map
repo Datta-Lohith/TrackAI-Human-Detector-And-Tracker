@@ -1,0 +1,10 @@
+<map id="TrackAI::Detector" name="TrackAI::Detector">
+<area shape="rect" id="node1" title="A class for handling object detection using a deep learning model." alt="" coords="132,484,265,620"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,300,56,377"/>
+<area shape="rect" id="node3" title=" " alt="" coords="176,300,221,377"/>
+<area shape="rect" id="node4" title=" " alt="" coords="245,300,432,377"/>
+<area shape="rect" id="node5" title=" " alt="" coords="227,160,314,237"/>
+<area shape="rect" id="node6" title=" " alt="" coords="201,5,340,97"/>
+<area shape="rect" id="node7" title=" " alt="" coords="338,160,467,237"/>
+<area shape="rect" id="node8" title=" " alt="" coords="383,13,422,90"/>
+</map>
