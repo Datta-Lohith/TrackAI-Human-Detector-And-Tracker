@@ -19,8 +19,9 @@ namespace TrackAI {
 class Visualizer {
 
  public:
-    void displayResults();
-    void createBoundingBox();
+    void DisplayResults();
+    void CreateBoundingBox();
+    void SaveResults();
 };
 }
 
