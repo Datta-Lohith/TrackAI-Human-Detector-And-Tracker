@@ -29,6 +29,7 @@ std::string model_path = "../../Data/Model/yolov8s.onnx"; ///< Path to the YOLO 
 TrackAI::Detector detector;         ///< Instance of the Detector class
 TrackAI::Visualizer visualizer;     ///< Instance of the Visualizer class
 TrackAI::Robot robot;               ///< Instance of the Robot class
+TrackAI::Tracker tracker;           ///< Instance of the Tracker class
 
 /**
  * @brief Test case to validate loading of the YOLO model.
@@ -65,6 +66,20 @@ TEST(postprocess_test, this_is_to_test_postprocessing) {
           .PostProcess(img, det, &class_ids, &confidences, &boxes, &indices)
           .type(),
       img.type());
+}
+
+/**
+ * @brief Test case to validate the initialization and update functionality of the Tracker.
+ *
+ * This test checks if the Tracker can initialize and update with the given bounding boxes.
+ */
+TEST(HumanTrackerTest, Initialize_Update) {
+  bboxes.clear();
+  bboxes.push_back(cv::Rect(10, 10, 20, 20));
+  bboxes.push_back(cv::Rect(30, 30, 40, 40));
+
+  tracker.Track(img, bboxes);
+  EXPECT_EQ(bboxes.size(), 2);
 }
 
 /**
