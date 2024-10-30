@@ -122,7 +122,8 @@ void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detectio
 
     std::cout << "Number of detections: " << bboxes.size() << std::endl;
     
-
+    TrackAI::Tracker tracker;
+    tracker.Track(human, bboxes);
     visualizer.DisplayResults(net, human);
 
     // Transform and print coordinates in robot frame
