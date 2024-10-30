@@ -29,29 +29,37 @@ on:
 
 jobs:
   build-run-upload:
-    # Create a container of the latest Ubuntu, other values could be
-    # ubuntu-latest, ubuntu-22.04, etc.
     runs-on: ubuntu-22.04
 
     steps:
-      # We want to use GitHub CI checkout version 3 to check out our branch
+      # Step 1: Check out the code
       - uses: actions/checkout@v3
 
+      # Step 2: Set up cache for OpenCV build directory
+      - name: Cache OpenCV directory
+        uses: actions/cache@v3
+        with:
+          path: opencv
+          key: ${{ runner.os }}-opencv-${{ hashFiles('opencv_contrib/modules/**', 'opencv/**') }}
+          restore-keys: |
+            ${{ runner.os }}-opencv-
+
+      # Step 3: Install OpenCV (use cached build, and run 'make install' if necessary)
       - name: Install OpenCV
         run: |
-          # For opencv
-          git clone https://github.com/opencv/opencv.git
-          cd opencv 
-          git checkout 4.10.0
-          cd ..
-          git clone https://github.com/opencv/opencv_contrib.git
-          cd opencv_contrib
-          git checkout 4.10.0
-          cd ..
-          cd opencv
-          mkdir build
-          cd build
-          cmake -D CMAKE_BUILD_TYPE=RELEASE \
+          if [ ! -d "opencv" ]; then
+            git clone https://github.com/opencv/opencv.git
+            cd opencv 
+            git checkout 4.10.0
+            cd ..
+            git clone https://github.com/opencv/opencv_contrib.git
+            cd opencv_contrib
+            git checkout 4.10.0
+            cd ..
+            cd opencv
+            mkdir build
+            cd build
+            cmake -D CMAKE_BUILD_TYPE=RELEASE \
                   -D BUILD_EXAMPLES=OFF \
                   -D BUILD_opencv_apps=OFF \
                   -D CMAKE_CXX_STANDARD=14 \
@@ -62,31 +70,38 @@ jobs:
                   -D BUILD_TESTS=OFF \
                   -D WITH_CUDA=OFF \
                   -D CMAKE_INSTALL_PREFIX=/usr/local ..
-                  
-          make 
+          else
+            # Install OpenCV and configure it even if cached build is restored
+            git clone https://github.com/opencv/opencv_contrib.git
+            cd opencv_contrib
+            git checkout 4.10.0
+            cd ..
+            cd opencv/build
+          fi
+          
           sudo make install
           sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
           sudo ldconfig
-        
+
+      # Step 4: Install Eigen (since it's small, we won't cache this)
       - name: Install Eigen
         run: |
           sudo apt install libeigen3-dev
 
-      # Install some system pacakges
+      # Step 6: Install build packages
       - name: Install build packages
         run: |
           sudo apt update
-          sudo apt install -y software-properties-common
-          sudo apt install -y doxygen lcov gcovr
+          sudo apt install -y software-properties-common doxygen lcov gcovr
 
-      # Build, run unit test, and generate coverage report
-      - name: Configure CMake flags and build exectables
+      # Step 7: Build, run unit tests, and generate coverage report
+      - name: Configure CMake flags and build executables
         run: |
           cmake -D WANT_COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug -S ./ -B build/
           cmake --build build/ --clean-first --target all test_coverage
           cat build/test_coverage.info
 
-      # Upload coverage result to CodeCov
+      # Step 8: Upload coverage result to CodeCov
       - name: Upload coverage result to CodeCov
         uses: codecov/codecov-action@v4
         with:

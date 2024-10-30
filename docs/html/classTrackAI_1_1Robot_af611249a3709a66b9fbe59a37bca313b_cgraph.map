@@ -1,0 +1,4 @@
+<map id="TrackAI::Robot::ProcessImage" name="TrackAI::Robot::ProcessImage">
+<area shape="rect" id="node1" title="Processes a single image for detection and tracking." alt="" coords="5,5,220,32"/>
+<area shape="rect" id="node2" href="$classTrackAI_1_1Tracker.html#a9000c5db2225d70d904f1c18d60030ab" title="Tracks objects in the current frame based on bounding boxes." alt="" coords="268,5,433,32"/>
+</map>

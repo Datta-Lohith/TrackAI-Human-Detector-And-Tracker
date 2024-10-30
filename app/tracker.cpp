@@ -30,5 +30,19 @@ TrackAI::Tracker::Tracker() {
  * @param bboxes A vector of bounding boxes representing detected objects to track.
  */
 void TrackAI::Tracker::Track(cv::Mat& frame, std::vector<cv::Rect> bboxes) {
-    std::cout << "Tracking Objects..." << std::endl;
+    if (!isInitialized) {
+        // Initialize the tracker with the first set of bounding boxes
+        for (cv::Rect& bbox : bboxes) {
+            cv::rectangle(frame, bbox, cv::Scalar(0, 0, 0), 2); // Draw the initial bounding box
+            tracker->init(frame, bbox); // Initialize the tracker with the first bounding box
+        }
+        isInitialized = true; // Set the initialized flag to true
+        return; // Exit after initialization
+    }
+    
+    // Update the tracker for each bounding box
+    for (cv::Rect& current_box : bboxes) {
+        tracker->update(frame, current_box); // Update the tracker with the current frame
+        cv::rectangle(frame, current_box, cv::Scalar(0, 0, 0), 2); // Draw the updated bounding box
+    }
 }

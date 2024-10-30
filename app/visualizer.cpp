@@ -120,7 +120,7 @@ void TrackAI::Visualizer::SaveResults() {
     }
     
     // Use MJPG codec instead of MP4V
-    cv::VideoWriter videoWriter("Results/output.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 1, frameSize);
+    cv::VideoWriter videoWriter("Results/output.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 5, frameSize);
 
     if (!videoWriter.isOpened()) {
         std::cerr << "Could not open the output video file for write." << std::endl;
