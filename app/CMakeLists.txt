@@ -26,5 +26,3 @@ target_link_libraries(trackAI PUBLIC
   ${OpenCV_LIBS} 
   ${EIGEN3_LIBS}
   )
-
-  
