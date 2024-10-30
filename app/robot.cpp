@@ -116,15 +116,17 @@ void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detectio
 
     human = detector.PostProcess(frame, detections, &class_ids, &confidences, &boxes, &indices);
 
-    std::cout << "Number of detections: " << indices.size() << std::endl;
-
     std::vector<cv::Rect> bboxes;
     visualizer.CreateBoundingBox(indices, boxes, &bboxes, frame, 
                                 detector.class_list, class_ids, confidences);
+
+    std::cout << "Number of detections: " << bboxes.size() << std::endl;
+    
+
     visualizer.DisplayResults(net, human);
 
     // Transform and print coordinates in robot frame
-    CoorInRobotFrame(boxes);
+    CoorInRobotFrame(bboxes);
 }
 
 /**
