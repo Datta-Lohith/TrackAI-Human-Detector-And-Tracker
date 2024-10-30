@@ -23,6 +23,6 @@
  */
 int main() {
     TrackAI::Robot robot; ///< Create an instance of the Robot class
-    robot.Run(false);      ///< Start the robot operation, with camera input disabled
+    robot.Run(true);      ///< Start the robot operation, with camera input disabled
     return 0;             ///< Return success
 }
