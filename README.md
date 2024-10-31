@@ -54,60 +54,37 @@ In phase 1 we have started the implementation of high level design which is the 
 ### Deliverables
 [![Phase 1 Video](https://img.shields.io/badge/Explanation%20Video-000000?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/drive/folders/1NQEUPYPqN814h3bvbUSl-iNk9iqZehtv?usp=sharing)
 [![UML Diagrams](https://img.shields.io/badge/UML%20Diagram%20Phase%201-000000?style=for-the-badge&logo=uml&logoColor=white)](/UML/Revised/Revised_UML.pdf)
-[![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=0#gid=0)
+[![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=241005242#gid=241005242)
+
+## Phase 2:
+In phase 2 we have implemented the high level design which is the the Revised UML. All the classes are implemented to their full functionality and tested with live camera feed. The results can be viewed in the Results Folder.
+
+
+### Deliverables
+[![Phase 2 Video](https://img.shields.io/badge/Explanation%20Video-000000?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/drive/folders/1JP3SHUH1i5-rtiUJC2f81QBiTwajmyl8?usp=sharing)
+[![UML Diagrams](https://img.shields.io/badge/UML%20Diagram%20Phase%202-000000?style=for-the-badge&logo=uml&logoColor=white)](/UML/Revised/Revised_UML.pdf)
+[![Project Backlog](https://img.shields.io/badge/project%20Backlog-000000?style=for-the-badge&logo=libreofficecalc&logoColor=white)](https://docs.google.com/spreadsheets/d/1fdzaFWkkAuVonq0ZzD6LnyzUNfFDbs992vhskWPqHbA/edit?gid=1503816755#gid=1503816755)
 
 
 ## Dependencies Installation
 The project requires opencv library installation. Follow the below procedure to install opencv libraries
 
 ```bash
-    # For opencv
-    git clone https://github.com/opencv/opencv.git
-    cd opencv 
-    git checkout 4.10.0
-    cd ..
-    git clone https://github.com/opencv/opencv_contrib.git
-    cd opencv_contrib
-    git checkout 4.10.0
-    cd ..
-    cd opencv
-    mkdir build
-    cd build
-    cmake -D CMAKE_BUILD_TYPE=RELEASE \
-            -D BUILD_EXAMPLES=OFF \
-            -D BUILD_opencv_apps=OFF \
-            -D CMAKE_CXX_STANDARD=14 \
-            -D CMAKE_CXX_FLAGS="-std=c++14" \
-            -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
-            -D BUILD_DOCS=OFF \
-            -D BUILD_PERF_TESTS=OFF \
-            -D BUILD_TESTS=OFF \
-            -D WITH_CUDA=OFF \
-            -D CMAKE_INSTALL_PREFIX=/usr/local ..
-            
-    make 
-    sudo make install
-    sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
-    sudo ldconfig
-
-    #For Eigen
-    sudo apt install libeigen3-dev
+    # Clone the Repository
+    git clone https://github.com/Datta-Lohith/TrackAI-Human-Detector-and-Tracker.git
+    # Go to the directory where the folder is downloaded
+    cd TrackAI-Human-Detector-And-Tracker
+    # Install Dependencies
+    ./scripts/install_dependencies.sh
 ```
 
 ## Code Build Procedure
-Follow the below procedure to download the code and start building
-```bash
-git clone https://github.com/Datta-Lohith/TrackAI-Human-Detector-and-Tracker.git
-# Go to the directory where the folder is downloaded
-cd TrackAI-Human-Detector-And-Tracker
-```
-Follow the below procedure to build the code after cloning the repository
+Follow the below procedure to build the code after installing the dependencies
 ```bash
     # Configure the project and generate a native build system:
     # Must re-run this command whenever any CMakeLists.txt file has been changed.
     cmake -S ./ -B build/
     # Compile and build the project:
-    # rebuild only files that are modified since the last build
     cmake --build build/
     # Run program:
     ./build/app/trackAI
@@ -139,10 +116,23 @@ To run the tests and generate code coverage reports:
     # Check the Generated Doc HTML by going to docs -> html -> index.html
 ```
 
+## Results
+
+
+<p align="center">
+<img src="/Results/output.gif" alt="Human Detection and Tracking" width="80%">
+</p>
+
+
 ### LICENSE
 
 This project is open source and is released under the MIT License. You are free to use, modify, and distribute the code in accordance with the terms of the MIT License.
 
 ### References
 
-- https://github.com/ultralytics/ultralytics/tree/main/examples/YOLOv8-CPP-Inference
+- [![YOLOv8-CPP-Inference](https://img.shields.io/badge/GitHub-YOLOv8--CPP--Inference-black?style=flat-square&logo=github)](https://github.com/ultralytics/ultralytics/tree/main/examples/YOLOv8-CPP-Inference)
+-  Rajlich, V. Software Engineering Current Practice
+- Zuraimi, M. A. B., Zaman, F. H. K. ”Vehicle Detection and Tracking using YOLO and
+DeepSORT,” 2021 IEEE Symposium on Computer Applications & Industrial Electronics
+(ISCAIE), Penang, Malaysia, 2021, pp. 23-29.
+- LearnOpenCV, ”Object Detection and Reidentification with FairMOT,” [![Learn OpenCV](https://img.shields.io/badge/Learn%20More-OpenCV-blue?style=flat-square&logo=opencv&logoColor=white)](https://learnopencv.com/object-tracking-and-reidentification-with-fairmot/)
