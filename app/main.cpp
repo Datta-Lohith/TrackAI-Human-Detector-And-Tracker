@@ -22,7 +22,7 @@
  * @return int Returns 0 upon successful execution.
  */
 int main() {
-    TrackAI::Robot robot; ///< Create an instance of the Robot class
-    robot.Run(true);      ///< Start the robot operation, with camera input disabled
-    return 0;             ///< Return success
+    TrackAI::Robot robot;  // Create an instance of the Robot class
+    robot.Run(true);  // Start the robot operation, with camera input disabled
+    return 0;  // Return success
 }

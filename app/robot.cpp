@@ -16,11 +16,11 @@
  *
  * Initializes the camera intrinsic matrix K, rotation matrix R, and translation vector T.
  */
-TrackAI::Robot::Robot() 
+TrackAI::Robot::Robot()
     : K((cv::Mat_<double>(3, 3) << 600.0, 0, 320.0,
                                    0, 600.0, 240.0,
                                    0, 0, 1.0)),
-      R(cv::Mat::eye(3, 3, CV_64F)), 
+      R(cv::Mat::eye(3, 3, CV_64F)),
       T((cv::Mat_<double>(3, 1) << 0, 0, 2.0)) {
     // Default camera intrinsic matrix K
     // Default rotation matrix R (identity matrix, no rotation)
@@ -53,10 +53,10 @@ void TrackAI::Robot::Run(bool is_camera) {
     std::vector<cv::Mat> detections;
     cv::Mat human;
     std::string model_path = "Data/Model/yolov8s.onnx";
-    net = detector.Load(model_path); // Load the YOLO model
+    net = detector.Load(model_path);  // Load the YOLO model
 
     if (is_camera) {
-        cv::VideoCapture cap(0); // Open the default camera
+        cv::VideoCapture cap(0);  // Open the default camera
 
         // Check if the camera is successfully opened
         if (!cap.isOpened()) {
@@ -66,33 +66,32 @@ void TrackAI::Robot::Run(bool is_camera) {
 
         while (true) {
             cv::Mat frame;
-            cap >> frame; // Capture a frame from the camera
-            
-            ProcessImage(frame, detections, human); // Process the captured frame
-            
+            cap >> frame;  // Capture a frame from the camera
+
+           ProcessImage(frame, detections, human);
+
             // Exit on ESC key press
             if (cv::waitKey(25) == 27) {
-                break; // Break the loop if ESC is pressed
+                break;  // Break the loop if ESC is pressed
             }
         }
-        cap.release(); // Release the camera
+        cap.release();  // Release the camera
     } else {
         std::string folder_path = "Data/Images/";
-        std::vector<std::string> image_files = {"img0.jpg", "img1.jpg", "img2.jpg", 
-                                                  "img3.jpg", "img4.jpg", "img5.jpg", 
-                                                  "img6.jpg", "img7.jpg", "img8.jpg", 
-                                                  "img9.jpg"};
+        std::vector<std::string> image_files = {"img0.jpg", "img1.jpg",
+         "img2.jpg", "img3.jpg", "img4.jpg", "img5.jpg",
+         "img6.jpg", "img7.jpg", "img8.jpg", "img9.jpg"};
 
         for (const auto &image_file : image_files) {
-            cv::Mat frame = cv::imread(folder_path + image_file); // Load each image
+            cv::Mat frame = cv::imread(folder_path + image_file);
 
-            ProcessImage(frame, detections, human); // Process each image
+            ProcessImage(frame, detections, human);
 
-            cv::waitKey(0); // Wait for a key press before processing the next image
+            cv::waitKey(0);  // Wait for a key press
         }
     }
-    visualizer.SaveResults(); // Save the results
-    cv::destroyAllWindows(); // Close all OpenCV windows
+    visualizer.SaveResults();  // Save the results
+    cv::destroyAllWindows();  // Close all OpenCV windows
 }
 
 /**
@@ -106,7 +105,8 @@ void TrackAI::Robot::Run(bool is_camera) {
  * @param detections A vector to store the detection results.
  * @param human A matrix to hold the detected human information.
  */
-void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detections, cv::Mat &human) {
+void TrackAI::Robot::ProcessImage(
+    cv::Mat &frame, std::vector<cv::Mat> &detections, cv::Mat &human) {
     detections = detector.PreProcess(frame, net);
 
     std::vector<int> class_ids;
@@ -114,14 +114,15 @@ void TrackAI::Robot::ProcessImage(cv::Mat &frame, std::vector<cv::Mat> &detectio
     std::vector<cv::Rect> boxes;
     std::vector<int> indices;
 
-    human = detector.PostProcess(frame, detections, &class_ids, &confidences, &boxes, &indices);
+    human = detector.PostProcess(frame, detections, &class_ids,
+     &confidences, &boxes, &indices);
 
     std::vector<cv::Rect> bboxes;
-    visualizer.CreateBoundingBox(indices, boxes, &bboxes, frame, 
+    visualizer.CreateBoundingBox(indices, boxes, &bboxes, frame,
                                 detector.class_list, class_ids, confidences);
 
     std::cout << "Number of detections: " << bboxes.size() << std::endl;
-    
+
     TrackAI::Tracker tracker;
     tracker.Track(human, bboxes);
     visualizer.DisplayResults(net, human);
@@ -145,10 +146,12 @@ void TrackAI::Robot::CoorInRobotFrame(const std::vector<cv::Rect> &detections) {
     // Loop through each detected object
     for (const cv::Rect &bbox : detections) {
         // Calculate the center of the bounding box
-        cv::Point2f center(bbox.x + bbox.width / 2.0, bbox.y + bbox.height / 2.0);
+        cv::Point2f center(bbox.x + bbox.width / 2.0,
+        bbox.y + bbox.height / 2.0);
 
         // Create a 3D point in normalized camera coordinates
-        cv::Mat normalized_point = (cv::Mat_<double>(3, 1) << center.x, center.y, 1.0);
+        cv::Mat normalized_point = (cv::Mat_<double>(3, 1) << center.x,
+                                    center.y, 1.0);
 
         // Convert from normalized camera coordinates to camera frame
         cv::Mat camera_frame_point = R * normalized_point + T;
@@ -159,7 +162,7 @@ void TrackAI::Robot::CoorInRobotFrame(const std::vector<cv::Rect> &detections) {
         double y = camera_frame_point.at<double>(1, 0);
         double z = camera_frame_point.at<double>(2, 0);
 
-        // Output or process the coordinates as needed
-        std::cout << "Object coordinates in robot frame: X=" << x << ", Y=" << y << ", Z=" << z << std::endl;
+        std::cout << "Object coordinates in robot frame: X=" << x << ", Y="
+                  << y << ", Z=" << z << std::endl;
     }
 }

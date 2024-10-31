@@ -16,8 +16,8 @@
  * Initializes the tracker using the CSRT algorithm and sets the initialization flag.
  */
 TrackAI::Tracker::Tracker() {
-    isInitialized = false; // Indicates whether the tracker has been initialized
-    tracker = cv::TrackerCSRT::create(); // Create a new CSRT tracker instance
+    isInitialized = false;  // Flag to check if the tracker is initialized
+    tracker = cv::TrackerCSRT::create();  // Create a new CSRT tracker instance
 }
 
 /**
@@ -33,16 +33,16 @@ void TrackAI::Tracker::Track(cv::Mat& frame, std::vector<cv::Rect> bboxes) {
     if (!isInitialized) {
         // Initialize the tracker with the first set of bounding boxes
         for (cv::Rect& bbox : bboxes) {
-            cv::rectangle(frame, bbox, cv::Scalar(0, 0, 0), 2); // Draw the initial bounding box
-            tracker->init(frame, bbox); // Initialize the tracker with the first bounding box
+            cv::rectangle(frame, bbox, cv::Scalar(0, 0, 0), 2);
+            tracker->init(frame, bbox);  // Initialize the tracker
         }
-        isInitialized = true; // Set the initialized flag to true
-        return; // Exit after initialization
+        isInitialized = true;  // Set the initialized flag to true
+        return;  // Exit after initialization
     }
-    
+
     // Update the tracker for each bounding box
     for (cv::Rect& current_box : bboxes) {
-        tracker->update(frame, current_box); // Update the tracker with the current frame
-        cv::rectangle(frame, current_box, cv::Scalar(0, 0, 0), 2); // Draw the updated bounding box
+        tracker->update(frame, current_box);  // Updating tracker
+        cv::rectangle(frame, current_box, cv::Scalar(0, 0, 0), 2);
     }
 }

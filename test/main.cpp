@@ -23,6 +23,6 @@
  * @return int Returns 0 if all tests pass, or a non-zero value if any tests fail.
  */
 int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);  ///< Initialize the Google Test framework
-  return RUN_ALL_TESTS();                   ///< Run all tests and return the result
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();  // Run all tests and return the result
 }

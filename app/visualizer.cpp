@@ -62,7 +62,7 @@ void TrackAI::Visualizer::CreateBoundingBox(
     std::vector<cv::Rect> *bboxes, cv::Mat &input_image,
     std::vector<std::string> class_list, std::vector<int> class_ids,
     const std::vector<float> confidences) {
-    int id = 0; // Object ID for labeling
+    int id = 0;  // Object ID for labeling
     for (int i = 0; i < indices.size(); i++) {
         int idx = indices[i];
         cv::Rect box = boxes[idx];
@@ -75,7 +75,8 @@ void TrackAI::Visualizer::CreateBoundingBox(
         bboxes->push_back(cv::Rect(left, top, width, height));
         // Draw bounding box.
         cv::rectangle(input_image, cv::Point(left, top),
-                      cv::Point(left + width, top + height), BLUE, 3 * THICKNESS);
+                      cv::Point(left + width, top + height),
+                      BLUE, 3 * THICKNESS);
 
         // Get the label for the class name and its confidence.
         std::string label;
@@ -89,10 +90,13 @@ void TrackAI::Visualizer::CreateBoundingBox(
 
         // Draw the label background and the label itself.
         cv::Point tlc = cv::Point(left, top1);
-        cv::Point brc = cv::Point(left + label_size.width, top1 + label_size.height + baseLine);
-        cv::rectangle(input_image, tlc, brc, BLACK, cv::FILLED);
-        cv::putText(input_image, label, cv::Point(left, top1 + label_size.height),
-                    FONT, 0.7, YELLOW, THICKNESS);
+        cv::Point brc = cv::Point(left + label_size.width,
+                        top1 + label_size.height + baseLine);
+        cv::rectangle(input_image, tlc, brc,
+               BLACK, cv::FILLED);
+        cv::putText(input_image, label,
+        cv::Point(left, top1 + label_size.height), FONT,
+        0.7, YELLOW, THICKNESS);
     }
 }
 
@@ -108,7 +112,8 @@ void TrackAI::Visualizer::SaveResults() {
         return;
     }
 
-    std::cout << std::string(20, '!') << "Saving Results to a video" << std::string(20, '!')  << std::endl;
+    std::cout << std::string(20, '!') << "Saving Results to a video"
+              << std::string(20, '!')  << std::endl;
 
     cv::Size frameSize = images[0].size();
 
@@ -118,12 +123,13 @@ void TrackAI::Visualizer::SaveResults() {
             cv::resize(image, image, frameSize);
         }
     }
-    
+
     // Use MJPG codec instead of MP4V
-    cv::VideoWriter videoWriter("Results/output.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 5, frameSize);
+    cv::VideoWriter videoWriter("Results/output.avi",
+    cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 5, frameSize);
 
     if (!videoWriter.isOpened()) {
-        std::cerr << "Could not open the output video file for write." << std::endl;
+        std::cerr << "Error opening file" << std::endl;
         return;
     }
 

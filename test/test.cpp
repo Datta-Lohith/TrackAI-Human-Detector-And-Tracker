@@ -15,21 +15,21 @@
 #include "opencv2/imgcodecs.hpp"
 
 // Global variables for testing
-std::vector<cv::Rect> boxes;        ///< Vector to hold bounding boxes
-std::vector<int> indices;           ///< Vector to hold indices of detected objects
-std::vector<int> class_ids;         ///< Vector to hold class IDs for detected objects
-std::vector<float> confidences;     ///< Vector to hold confidence scores for detections
-std::vector<std::string> class_list; ///< Vector to hold class names
-std::vector<cv::Rect> bboxes;       ///< Vector to store created bounding boxes
-cv::Mat img = cv::imread("../../Data/Images/img0.jpg"); ///< Input image for testing
-int width = img.cols;               ///< Width of the input image
-std::string model_path = "../../Data/Model/yolov8s.onnx"; ///< Path to the YOLO model
+std::vector<cv::Rect> boxes;        // To store bounding boxes
+std::vector<int> indices;           // To store indices of detected objects
+std::vector<int> class_ids;         // To store class IDs for detected objects
+std::vector<float> confidences;     // To store confidence scores for detections
+std::vector<std::string> class_list;  // To store class names
+std::vector<cv::Rect> bboxes;       // Vector to store created bounding boxes
+cv::Mat img = cv::imread("../../Data/Images/img0.jpg");
+int width = img.cols;               // Width of the input image
+std::string model_path = "../../Data/Model/yolov8s.onnx";  // Yolo model
 
 // Instances of classes being tested
-TrackAI::Detector detector;         ///< Instance of the Detector class
-TrackAI::Visualizer visualizer;     ///< Instance of the Visualizer class
-TrackAI::Robot robot;               ///< Instance of the Robot class
-TrackAI::Tracker tracker;           ///< Instance of the Tracker class
+TrackAI::Detector detector;         // Instance of the Detector class
+TrackAI::Visualizer visualizer;     // Instance of the Visualizer class
+TrackAI::Robot robot;               // Instance of the Robot class
+TrackAI::Tracker tracker;           // Instance of the Tracker class
 
 /**
  * @brief Test case to validate loading of the YOLO model.
