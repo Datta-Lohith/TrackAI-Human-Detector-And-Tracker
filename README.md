@@ -73,11 +73,50 @@ The project requires opencv library installation. Follow the below procedure to 
     # Clone the Repository
     git clone https://github.com/Datta-Lohith/TrackAI-Human-Detector-and-Tracker.git
     # Go to the directory where the folder is downloaded
-    cd TrackAI-Human-Detector-And-Tracker
+    cd TrackAI-Human-Detector-and-Tracker
     # Install Dependencies
     ./scripts/install_dependencies.sh
 ```
+or run the following commands
 
+```bash
+    sudo apt install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+
+    git clone https://github.com/opencv/opencv.git
+    cd opencv 
+    git checkout 4.10.0
+    cd ..
+    git clone https://github.com/opencv/opencv_contrib.git
+    cd opencv_contrib
+    git checkout 4.10.0
+    cd ..
+    cd opencv
+    mkdir build
+    cd build
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
+            -D BUILD_EXAMPLES=OFF \
+            -D BUILD_opencv_apps=OFF \
+            -D CMAKE_CXX_STANDARD=14 \
+            -D CMAKE_CXX_FLAGS="-std=c++14" \
+            -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+            -D BUILD_DOCS=OFF \
+            -D BUILD_PERF_TESTS=OFF \
+            -D BUILD_TESTS=OFF \
+            -D WITH_CUDA=OFF \
+            -D CMAKE_INSTALL_PREFIX=/usr/local ..
+    # Install OpenCV and configure it even if cached build is restored
+    git clone https://github.com/opencv/opencv_contrib.git
+    cd opencv_contrib
+    git checkout 4.10.0
+    cd ..
+    cd opencv/build
+    sudo make install
+    sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
+    sudo ldconfig
+
+    # Install eigen
+    sudo apt install libeigen3-dev
+```
 ## Code Build Procedure
 Follow the below procedure to build the code after installing the dependencies
 ```bash

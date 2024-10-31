@@ -29,6 +29,8 @@
 compile_commands.json
 *.a
 *.lib
+opencv
+opencv_contrib
 
 # Executables
 *.exe

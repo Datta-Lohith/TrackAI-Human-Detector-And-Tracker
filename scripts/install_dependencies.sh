@@ -3,6 +3,7 @@
 # Install minimal prerequisites
 echo "Updating package list and installing prerequisites..."
 sudo apt update && sudo apt install -y cmake g++ wget unzip libeigen3-dev graphviz
+sudo apt install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
 
 # Clone OpenCV repository
 echo "Cloning OpenCV repository..."
@@ -44,5 +45,4 @@ sudo make install
 sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
 
-sudo apt install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
 
