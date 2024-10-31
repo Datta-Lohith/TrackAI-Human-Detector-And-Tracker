@@ -1,2 +1,26 @@
-valgrind: Unknown option: --leak-check==full
-valgrind: Use --help for more information or consult the user manual.
+==21316== Memcheck, a memory error detector
+==21316== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==21316== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==21316== Command: ./build/app/trackAI
+==21316== 
+[ WARN:0@3.072] global cap_gstreamer.cpp:2839 handleMessage OpenCV | GStreamer warning: Embedded video playback halted; module v4l2src0 reported: Cannot identify device '/dev/video0'.
+[ WARN:0@3.102] global cap_gstreamer.cpp:1698 open OpenCV | GStreamer warning: unable to start pipeline
+[ WARN:0@3.111] global cap_gstreamer.cpp:1173 isPipelinePlaying OpenCV | GStreamer warning: GStreamer: pipeline have not been created
+[ WARN:0@3.122] global cap_v4l.cpp:999 open VIDEOIO(V4L2:/dev/video0): can't open camera by index
+[ERROR:0@3.144] global obsensor_uvc_stream_channel.cpp:158 getStreamChannelGroup Camera index out of range
+Error: Could not access the camera.
+==21316== 
+==21316== HEAP SUMMARY:
+==21316==     in use at exit: 1,955,137 bytes in 20,135 blocks
+==21316==   total heap usage: 633,521 allocs, 613,386 frees, 120,990,683 bytes allocated
+==21316== 
+==21316== LEAK SUMMARY:
+==21316==    definitely lost: 16,430 bytes in 2 blocks
+==21316==    indirectly lost: 0 bytes in 0 blocks
+==21316==      possibly lost: 0 bytes in 0 blocks
+==21316==    still reachable: 1,880,267 bytes in 19,856 blocks
+==21316==         suppressed: 0 bytes in 0 blocks
+==21316== Rerun with --leak-check=full to see details of leaked memory
+==21316== 
+==21316== For lists of detected and suppressed errors, rerun with: -s
+==21316== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
